@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Stories from "../ui/feed/Stories";
 import { Suspense } from "react";
+import Posts from "../ui/feed/Posts";
 
 export default function Home() {
   return (
@@ -9,7 +10,9 @@ export default function Home() {
         <Suspense fallback={<div>loading...</div>}>
           <Stories />
         </Suspense>
-        <h1>Posts</h1>
+       <Suspense fallback={<div>loading...</div>}>
+        <Posts/>
+       </Suspense>
       </section>
       <section>
         <h1>MIni Profile</h1>

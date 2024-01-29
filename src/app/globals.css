@@ -74,3 +74,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .btn {
+  @apply h-7 hover:scale-125 transition-transform duration-200 ease-in-out cursor-pointer;
+  }
+}

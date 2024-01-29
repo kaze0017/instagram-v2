@@ -1,20 +1,10 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React from "react";
 import { getRandomUsers } from "@/app/actions/getRandomUsers";
 import Image from "next/image";
 
-// interface User {
-//   name: string;
-//   profileImage: string;
-// }
 
 export default async function Stories() {
-  //   const [storyUsers, setStoryUsers] = useState<User[]>([]);
 
-  //   useEffect(() => {
-  //     getRandomUsers().then((data) => {
-  //       setStoryUsers(data);
-  //     });
-  //   }, []);
   const storyUsers = await getRandomUsers();
 
   return (
