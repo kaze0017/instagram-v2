@@ -1,15 +1,15 @@
-"use server";
-
-import { get } from "http";
+import MiniFaker from "minifaker";
 
 interface User {
   name: string;
   profileImage: string;
+  job: string;
+  email: string;
 }
 
-export async function getRandomUsers(): Promise<User[]> {
+export async function getRandomUsers({ n }: { n: number }): Promise<User[]> {
   const baseURL = process.env.RANDOMUSER_URL;
-  const url = baseURL + "?results=10";
+  const url = `${baseURL}?results=${n}`;
   const response = await fetch(url, {
     cache: "force-cache",
   });
@@ -19,29 +19,9 @@ export async function getRandomUsers(): Promise<User[]> {
   const users: User[] = data.results.map((result: any) => ({
     name: `${result.name.first} ${result.name.last}`,
     profileImage: result.picture.large, // Assuming the API provides a thumbnail for the profile image
+    email: result.email,
+    job: MiniFaker.jobTitle, // Use MiniFaker to generate a fake job title
   }));
 
   return users;
-}
-export async function getRandomUser(): Promise<User> {
-  const seed = Math.floor(Math.random() * 100).toString();
-  const url = `https://randomuser.me/api/?seed=1`;
-  try {
-    const response = await fetch(url, {
-      cache: "force-cache",
-    });
-    const data = await response.json();
-    // Parse the fetched data into a user object
-    const user: User = {
-      name: `${data.results[0].name.first} ${data.results[0].name.last}`,
-      profileImage: data.results[0].picture.large,
-    };
-  } catch (e) {
-    console.log(e);
-  }
-  const user: User = {
-    name: "name",
-    profileImage: "https://randomuser.me/api/portraits/women/51.jpg",
-  };
-  return user;
 }

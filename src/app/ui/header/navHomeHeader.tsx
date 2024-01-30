@@ -8,7 +8,7 @@ import { getRandomUsers } from "@/app/actions/getRandomUsers";
 export default function NavHomeHeader() {
   const [user, setUser] = useState({ name: "", profileImage: "" });
   useEffect(() => {
-    getRandomUsers().then((data) => {
+    getRandomUsers({ n: 10 }).then((data) => {
       setUser(data[0]);
     });
   }, []);
