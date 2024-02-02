@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { SessionProvider } from "next-auth/react";
 
 import Header from "@/app/ui/header/Header";
 
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   description: "Instagram Clone built with Next.js",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -16,9 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-gray-50 min-h-screen">
-        <Header />
-
-        {children}
+        <SessionProvider>{children}</SessionProvider>
       </body>
     </html>
   );

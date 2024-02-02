@@ -1,4 +1,3 @@
-import MiniFaker from "minifaker";
 
 interface User {
   name: string;
@@ -20,7 +19,6 @@ export async function getRandomUsers({ n }: { n: number }): Promise<User[]> {
     name: `${result.name.first} ${result.name.last}`,
     profileImage: result.picture.large, // Assuming the API provides a thumbnail for the profile image
     email: result.email,
-    job: MiniFaker.jobTitle, // Use MiniFaker to generate a fake job title
   }));
 
   return users;
